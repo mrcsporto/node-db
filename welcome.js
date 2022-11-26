@@ -1,4 +1,5 @@
-const mysql = require('mysql');
+const mysql = require('mysql')
+const fs = require('fs')
 
 const connection = mysql.createConnection({
     host: "localhost",
@@ -8,8 +9,9 @@ const connection = mysql.createConnection({
 });
 
 function show(res) {
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.end("<h1>Welcome</h1>");
+    res.setHeader('Content-Type', 'text/html')
+    const html = fs.readFileSync('./welcome.html')
+    res.end(html)
 }
 
 module.exports = {
